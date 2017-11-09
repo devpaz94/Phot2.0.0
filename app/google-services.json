@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "84122518007",
+    "firebase_url": "https://photclub-87a6c.firebaseio.com",
+    "project_id": "photclub-87a6c",
+    "storage_bucket": "photclub-87a6c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:84122518007:android:b56efe982dd8d5a5",
+        "android_client_info": {
+          "package_name": "com.example.android.phot100"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "84122518007-6186un2tq90bfj3jc2guesbmf6kmcl2i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.phot100",
+            "certificate_hash": "b26a6c388f4ed6862c5e5b4b6cc04f88a6805288"
+          }
+        },
+        {
+          "client_id": "84122518007-7njpdde0cd36th4k71ghatnv55spodqv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFrJnCnEc2j1hFU7jSmYzEcXQx2jWuVbU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "84122518007-7njpdde0cd36th4k71ghatnv55spodqv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

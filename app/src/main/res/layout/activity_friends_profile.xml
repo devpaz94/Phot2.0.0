@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.phot100.UsersFolder.FriendsProfile">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/default_image"
+        android:layout_margin="15dp"
+        android:id="@+id/profile_page_image" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Display Name"
+        android:layout_margin="20dp"
+        android:id="@+id/profile_name"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="example@email.com"
+        android:layout_margin="20dp"/>
+
+    <Button
+        android:id="@+id/send_request_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_margin="20dp"
+        android:padding="15dp"
+        android:text="send friend request" />
+
+
+
+</LinearLayout>
