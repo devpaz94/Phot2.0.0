@@ -4,12 +4,30 @@
     android:layout_height="match_parent"
     tools:context="com.example.android.phot100.MainFragments.Camera">
 
-    <!-- TODO: Update blank fragment layout -->
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="take photo"
-        android:layout_margin="100dp"
-        android:id="@+id/take_photo_btn"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/take_photo_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="139dp"
+            android:text="take photo" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/take_photo_btn"
+            android:id="@+id/set_wallpaper"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="119dp"
+            android:text="Set Wallpaper" />
+
+
+    </RelativeLayout>
+
 
 </FrameLayout>

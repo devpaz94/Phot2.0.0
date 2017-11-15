@@ -1,7 +1,10 @@
 package com.example.android.phot100.MainFragments;
 
 
+import android.app.WallpaperManager;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,8 +28,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
+
+import java.io.IOException;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -37,6 +44,7 @@ import static android.app.Activity.RESULT_OK;
 public class Camera extends Fragment {
 
     private Button mtakePhoto;
+    private Button mSetWallpaper;
     private View mMainView;
     private FirebaseUser mCurrentUser;
     private StorageReference mStorageReference;
@@ -57,7 +65,10 @@ public class Camera extends Fragment {
         mMainView =  inflater.inflate(R.layout.fragment_camera, container, false);
 
         mtakePhoto = mMainView.findViewById(R.id.take_photo_btn);
+        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        mSetWallpaper = mMainView.findViewById(R.id.set_wallpaper);
 
         mtakePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +78,24 @@ public class Camera extends Fragment {
                         .setAspectRatio(9, 16)
                         .getIntent(getContext());
                 startActivityForResult(intent, CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE);
+            }
+        });
+
+        mSetWallpaper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mUserDatabase.child(mCurrentUser.getUid()).child("background_image").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        String image = dataSnapshot.getValue(String.class);
+                        setWallpaper(image);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
 
@@ -81,7 +110,6 @@ public class Camera extends Fragment {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
-                mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
                 Uri resultUri = result.getUri();
                 final String currentUid = mCurrentUser.getUid();
 
@@ -99,8 +127,7 @@ public class Camera extends Fragment {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     String uid = dataSnapshot.getValue().toString();
-                                    mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
-                                    mUserDatabase.child("background_image").setValue(downloadUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    mUserDatabase.child(uid).child("background_image").setValue(downloadUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             Toast.makeText(getContext(), "Image Sent!", Toast.LENGTH_SHORT).show();
@@ -109,6 +136,8 @@ public class Camera extends Fragment {
                                 }
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
+
+
 
                                 }
                             });
@@ -125,5 +154,34 @@ public class Camera extends Fragment {
             }
         }
     }
+
+    private void setWallpaper(final String imageUrl){
+
+        Picasso.with(getContext()).load(imageUrl).into(new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+
+                WallpaperManager wallpaperManager = WallpaperManager.getInstance(getContext());
+                try {
+                    wallpaperManager.setBitmap(bitmap);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+            }
+        });
+
+
+    }
+
 
 }

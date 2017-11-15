@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
 
-            case R.id.scxewoh:
+            case R.id.settings:
                 Intent settingsIntent = new Intent(MainActivity.this, Settings.class);
                 startActivity(settingsIntent);
                 break;

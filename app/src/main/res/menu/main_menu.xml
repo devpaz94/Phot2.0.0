@@ -9,7 +9,7 @@
         android:title="Sign Out"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/scxewoh"
+        android:id="@+id/settings"
         android:title="Account Settings"
         app:showAsAction="never"/>
     <item
